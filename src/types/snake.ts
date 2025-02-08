@@ -1,7 +1,16 @@
-interface Snake {
-  direction: string;
-  length: number;
-  position: { x: number; y: number }[];
+import { DIRECTIONS } from "../constants";
+
+type Directions = (typeof DIRECTIONS)[keyof typeof DIRECTIONS];
+
+interface Position {
+  x: number;
+  y: number;
 }
 
-export type { Snake };
+interface Snake {
+  direction: Directions;
+  length: number;
+  positions: Position[];
+}
+
+export type { Snake, Directions, Position };

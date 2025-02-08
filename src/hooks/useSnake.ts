@@ -1,22 +1,71 @@
-import { useImmer } from "use-immer";
-import { START } from "../constants";
-import { Snake } from "../types/snake";
+import { DIRECTIONS, START } from "../constants";
+import { Directions, Snake } from "../types/snake";
+import { isInvalidDirection, updatePositions } from "../utils";
+import { useCallback, useState } from "react";
 
 export const useSnake = () => {
-  const [snake, updateSnake] = useImmer<Snake>({
-    direction: "UP",
+  const [snake, setSnake] = useState<Snake>({
+    direction: DIRECTIONS.up,
     length: 3,
-    position: [...Array(3).keys()].map((i) => ({
+    positions: [...Array(3).keys()].reverse().map((i) => ({
       x: START.x - i,
       y: START.y,
     })),
   });
 
   const move = () => {
-    updateSnake((draft) => {
-      draft.position.forEach((pos) => pos.x--);
+    setSnake((prev) => {
+      const newPositions = prev.positions.slice();
+      const head = { ...newPositions[0] };
+      switch (prev.direction) {
+        case DIRECTIONS.up:
+          return {
+            ...prev,
+            positions: updatePositions(
+              { x: head.x - 1, y: head.y },
+              newPositions
+            ),
+          };
+
+        case DIRECTIONS.down:
+          return {
+            ...prev,
+            positions: updatePositions(
+              { x: head.x + 1, y: head.y },
+              newPositions
+            ),
+          };
+
+        case DIRECTIONS.left:
+          return {
+            ...prev,
+            positions: updatePositions(
+              { x: head.x, y: head.y - 1 },
+              newPositions
+            ),
+          };
+
+        case DIRECTIONS.right:
+          return {
+            ...prev,
+            positions: updatePositions(
+              { x: head.x, y: head.y + 1 },
+              newPositions
+            ),
+          };
+      }
     });
   };
 
-  return { snake, move };
+  const changeDirection = useCallback(
+    (newDirection: Directions) => {
+      if (isInvalidDirection(snake.direction, newDirection)) {
+        return;
+      }
+      setSnake((prev) => ({ ...prev, direction: newDirection }));
+    },
+    [snake.direction]
+  );
+
+  return { snake, move, changeDirection };
 };

@@ -12,7 +12,7 @@ export const useGrid = (snake: Snake) => {
         <div key={i} className="grid-row">
           {Array.from({ length: BOUNDARIES.y }, (_, j) => (
             <div key={`${i}-${j}`} className={`grid-cell${borderClass(i, j)}`}>
-              {snake.position.some((pos) => pos.x === i && pos.y === j)
+              {snake.positions.some((pos) => pos.x === i && pos.y === j)
                 ? "o"
                 : " "}
             </div>
@@ -20,7 +20,7 @@ export const useGrid = (snake: Snake) => {
         </div>
       ))
     );
-  }, [snake.position]);
+  }, [snake.positions]);
 
   return { grid };
 };
