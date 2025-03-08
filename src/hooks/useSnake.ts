@@ -1,5 +1,5 @@
 import { DIRECTIONS, START } from "../constants";
-import { Directions, Snake } from "../types/snake";
+import { Directions, Snake } from "../types";
 import { isInvalidDirection, updatePositions } from "../utils";
 import { useCallback, useState } from "react";
 
@@ -13,7 +13,7 @@ export const useSnake = () => {
     })),
   });
 
-  const move = () => {
+  const move = useCallback(() => {
     setSnake((prev) => {
       const newPositions = prev.positions.slice();
       const head = { ...newPositions[0] };
@@ -26,7 +26,6 @@ export const useSnake = () => {
               newPositions
             ),
           };
-
         case DIRECTIONS.down:
           return {
             ...prev,
@@ -35,7 +34,6 @@ export const useSnake = () => {
               newPositions
             ),
           };
-
         case DIRECTIONS.left:
           return {
             ...prev,
@@ -44,7 +42,6 @@ export const useSnake = () => {
               newPositions
             ),
           };
-
         case DIRECTIONS.right:
           return {
             ...prev,
@@ -55,7 +52,7 @@ export const useSnake = () => {
           };
       }
     });
-  };
+  }, []);
 
   const changeDirection = useCallback(
     (newDirection: Directions) => {

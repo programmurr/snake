@@ -2,6 +2,11 @@ import { DIRECTIONS } from "../constants";
 
 type Directions = (typeof DIRECTIONS)[keyof typeof DIRECTIONS];
 
+type Food = {
+  x: number;
+  y: number;
+};
+
 interface Position {
   x: number;
   y: number;
@@ -13,4 +18,4 @@ interface Snake {
   positions: Position[];
 }
 
-export type { Snake, Directions, Position };
+export type { Snake, Directions, Position, Food };

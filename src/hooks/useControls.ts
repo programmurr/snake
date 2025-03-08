@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Directions } from "../types/snake";
+import { Directions } from "../types";
 import { DIRECTIONS } from "../constants";
 
 export const useControls = (onKeyDown: (direction: Directions) => void) => {

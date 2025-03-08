@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { BOUNDARIES } from "../constants";
-import { Snake } from "../types/snake";
+import { Food, Position } from "../types";
 import { borderClass } from "../utils";
 
-export const useGrid = (snake: Snake) => {
+export const useGrid = (snakePositions: Position[], food: Food | null) => {
   const [grid, setGrid] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
@@ -12,15 +12,17 @@ export const useGrid = (snake: Snake) => {
         <div key={i} className="grid-row">
           {Array.from({ length: BOUNDARIES.y }, (_, j) => (
             <div key={`${i}-${j}`} className={`grid-cell${borderClass(i, j)}`}>
-              {snake.positions.some((pos) => pos.x === i && pos.y === j)
+              {snakePositions.some((pos) => pos.x === i && pos.y === j)
                 ? "o"
+                : food?.x === i && food?.y === j
+                ? "x"
                 : " "}
             </div>
           ))}
         </div>
       ))
     );
-  }, [snake.positions]);
+  }, [snakePositions, food]);
 
   return { grid };
 };
