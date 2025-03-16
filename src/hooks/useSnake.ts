@@ -64,7 +64,7 @@ export const useSnake = () => {
     [snake.direction]
   );
 
-  const growSnake = () => {
+  const grow = useCallback(() => {
     setSnake((prev) => {
       const tail = {
         x: prev.positions[prev.length - 1].x,
@@ -76,7 +76,7 @@ export const useSnake = () => {
         positions: [...prev.positions, tail],
       };
     });
-  };
+  }, []);
 
-  return { snake, move, changeDirection, growSnake };
+  return { snake, move, changeDirection, grow };
 };

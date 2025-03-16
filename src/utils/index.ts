@@ -32,4 +32,18 @@ const isInvalidDirection = (direction: string, newDirection: string) =>
 const snakeIsEatingFood = (snakePositions: Position, foodPositions: Food) =>
   snakePositions.x === foodPositions.x && snakePositions.y === foodPositions.y;
 
-export { borderClass, updatePositions, isInvalidDirection, snakeIsEatingFood };
+const collision = (snakePositions: Position[]) => {
+  const head = snakePositions[0];
+  const body = snakePositions.slice(1);
+  return body.some(
+    (position) => position.x === head.x && position.y === head.y
+  );
+};
+
+export {
+  borderClass,
+  updatePositions,
+  isInvalidDirection,
+  snakeIsEatingFood,
+  collision,
+};
