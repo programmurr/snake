@@ -1,5 +1,5 @@
 import { BOUNDARIES, DIRECTIONS } from "../constants";
-import { Position } from "../types";
+import { Food, Position } from "../types";
 
 const borderClass = (i: number, j: number) => {
   let borderClass = "";
@@ -29,4 +29,7 @@ const isInvalidDirection = (direction: string, newDirection: string) =>
   (newDirection === DIRECTIONS.left && direction === DIRECTIONS.right) ||
   (newDirection === DIRECTIONS.right && direction === DIRECTIONS.left);
 
-export { borderClass, updatePositions, isInvalidDirection };
+const snakeIsEatingFood = (snakePositions: Position, foodPositions: Food) =>
+  snakePositions.x === foodPositions.x && snakePositions.y === foodPositions.y;
+
+export { borderClass, updatePositions, isInvalidDirection, snakeIsEatingFood };

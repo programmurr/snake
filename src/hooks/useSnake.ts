@@ -64,5 +64,19 @@ export const useSnake = () => {
     [snake.direction]
   );
 
-  return { snake, move, changeDirection };
+  const growSnake = () => {
+    setSnake((prev) => {
+      const tail = {
+        x: prev.positions[prev.length - 1].x,
+        y: prev.positions[prev.length - 1].y,
+      };
+      return {
+        ...prev,
+        length: prev.length + 1,
+        positions: [...prev.positions, tail],
+      };
+    });
+  };
+
+  return { snake, move, changeDirection, growSnake };
 };
