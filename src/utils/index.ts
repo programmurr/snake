@@ -32,12 +32,19 @@ const isInvalidDirection = (direction: string, newDirection: string) =>
 const snakeIsEatingFood = (snakePositions: Position, foodPositions: Food) =>
   snakePositions.x === foodPositions.x && snakePositions.y === foodPositions.y;
 
+const boundaryCollision = (head: Position) =>
+  head.x < 0 ||
+  head.x === BOUNDARIES.x ||
+  head.y < 0 ||
+  head.y === BOUNDARIES.y;
+
+const bodyCollision = (head: Position, body: Position[]) =>
+  body.some((position) => position.x === head.x && position.y === head.y);
+
 const collision = (snakePositions: Position[]) => {
   const head = snakePositions[0];
   const body = snakePositions.slice(1);
-  return body.some(
-    (position) => position.x === head.x && position.y === head.y
-  );
+  return boundaryCollision(head) || bodyCollision(head, body);
 };
 
 export {
