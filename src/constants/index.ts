@@ -1,12 +1,18 @@
-const START = { x: 24, y: 23 };
+const START = { x: 12, y: 12 };
 
-const BOUNDARIES = { x: 49, y: 49 };
+const BOUNDARIES = { x: 25, y: 25 };
 
 const DIRECTIONS = {
-  up: "UP",
-  down: "DOWN",
-  left: "LEFT",
-  right: "RIGHT",
+  UP: "UP",
+  DOWN: "DOWN",
+  LEFT: "LEFT",
+  RIGHT: "RIGHT",
 } as const;
 
-export { START, BOUNDARIES, DIRECTIONS };
+const DIFFICULTIES = [
+  { label: "Easy", value: 110 },
+  { label: "Medium", value: 50 },
+  { label: "Hard", value: 10 },
+];
+
+export { START, BOUNDARIES, DIRECTIONS, DIFFICULTIES };

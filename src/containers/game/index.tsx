@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useControls } from "../../hooks/useControls";
 import { useFood } from "../../hooks/useFood";
 import { useGrid } from "../../hooks/useGrid";
 import { useSnake } from "../../hooks/useSnake";
 import { collision, snakeIsEatingFood } from "../../utils";
 import { Box, Button, Typography } from "@mui/material";
-import { Dialog } from "../../components/Dialog";
+import { GameOverDialog } from "../../components/GameOverDialog";
+import { DIFFICULTIES } from "../../constants";
+import { DifficultySlider } from "../../components/DifficultySlider";
 
 export const Game = () => {
   const { snake, move, grow, changeDirection } = useSnake();
@@ -20,13 +22,9 @@ export const Game = () => {
 
   const [score, setScore] = useState(0);
 
-  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [open, setOpen] = useState(false);
 
-  const handleShowDialog = () => {
-    if (dialogRef.current) {
-      dialogRef.current.showModal();
-    }
-  };
+  const [difficulty, setDifficulty] = useState(DIFFICULTIES[0].value);
 
   useEffect(() => {
     if (isPlaying) {
@@ -45,9 +43,9 @@ export const Game = () => {
         }
         if (collision(snake.positions)) {
           setIsPlaying(false);
-          handleShowDialog();
+          setOpen(true);
         }
-      }, 100);
+      }, difficulty);
       return () => clearInterval(interval);
     }
   }, [
@@ -58,18 +56,42 @@ export const Game = () => {
     snake.positions,
     foodPosition,
     grow,
+    difficulty,
   ]);
 
   return (
-    <>
-      <Typography variant="h2">Snek</Typography>
-      <Box>
-        <Typography variant="body1">Score: {score}</Typography>
-        <Button onClick={() => setIsPlaying(true)}>Start</Button>
-        <Button onClick={() => setIsPlaying(false)}>Stop</Button>
-        <Box className="grid-container">{grid}</Box>
-        <Dialog score={score} dialogRef={dialogRef} />
+    <Box component="main">
+      <Box component="section">
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h1">Snek</Typography>
+          <Typography variant="body1" sx={{ margin: "1rem 0" }}>
+            Score: {score}
+          </Typography>
+          <Button sx={{ margin: "1rem 0" }} onClick={() => setIsPlaying(true)}>
+            Start
+          </Button>
+          <Box className="grid-container">{grid}</Box>
+          <DifficultySlider
+            value={difficulty}
+            handleSliderChange={(_, value) => {
+              if (!Array.isArray(value)) {
+                setDifficulty(value);
+              }
+            }}
+          />
+          <GameOverDialog
+            score={score}
+            open={open}
+            handleReset={() => window.location.reload()}
+          />
+        </Box>
       </Box>
-    </>
+    </Box>
   );
 };

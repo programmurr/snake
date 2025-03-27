@@ -2,7 +2,6 @@ import { ReactNode, useEffect, useState } from "react";
 import { BOUNDARIES } from "../constants";
 import { Food, Position } from "../types";
 import { borderClass } from "../utils";
-import { GridCell, GridContainer, GridRow } from "./grid/items";
 
 type Props = {
   snakePositions: Position[];
@@ -15,20 +14,20 @@ export const Grid = ({ snakePositions, food }: Props) => {
   useEffect(() => {
     setGrid(
       Array.from({ length: BOUNDARIES.x }, (_, i) => (
-        <GridRow key={i}>
+        <div key={i}>
           {Array.from({ length: BOUNDARIES.y }, (_, j) => (
-            <GridCell key={`${i}-${j}`} className={borderClass(i, j)}>
+            <div key={`${i}-${j}`} className={borderClass(i, j)}>
               {snakePositions.some((pos) => pos.x === i && pos.y === j)
                 ? "o"
                 : food?.x === i && food?.y === j
                 ? "x"
                 : " "}
-            </GridCell>
+            </div>
           ))}
-        </GridRow>
+        </div>
       ))
     );
   }, [snakePositions, food]);
 
-  return <GridContainer>{grid}</GridContainer>;
+  return grid;
 };

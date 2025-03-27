@@ -24,10 +24,10 @@ const updatePositions = (head: Position, newPositions: Position[]) => [
 ];
 
 const isInvalidDirection = (direction: string, newDirection: string) =>
-  (newDirection === DIRECTIONS.up && direction === DIRECTIONS.down) ||
-  (newDirection === DIRECTIONS.down && direction === DIRECTIONS.up) ||
-  (newDirection === DIRECTIONS.left && direction === DIRECTIONS.right) ||
-  (newDirection === DIRECTIONS.right && direction === DIRECTIONS.left);
+  (newDirection === DIRECTIONS.UP && direction === DIRECTIONS.DOWN) ||
+  (newDirection === DIRECTIONS.DOWN && direction === DIRECTIONS.UP) ||
+  (newDirection === DIRECTIONS.LEFT && direction === DIRECTIONS.RIGHT) ||
+  (newDirection === DIRECTIONS.RIGHT && direction === DIRECTIONS.LEFT);
 
 const snakeIsEatingFood = (snakePositions: Position, foodPositions: Food) =>
   snakePositions.x === foodPositions.x && snakePositions.y === foodPositions.y;

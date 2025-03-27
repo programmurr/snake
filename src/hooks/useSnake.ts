@@ -5,7 +5,7 @@ import { useCallback, useState } from "react";
 
 export const useSnake = () => {
   const [snake, setSnake] = useState<Snake>({
-    direction: DIRECTIONS.up,
+    direction: DIRECTIONS.UP,
     length: 3,
     positions: [...Array(3).keys()].reverse().map((i) => ({
       x: START.x - i,
@@ -18,7 +18,7 @@ export const useSnake = () => {
       const newPositions = prev.positions.slice();
       const head = { ...newPositions[0] };
       switch (prev.direction) {
-        case DIRECTIONS.up:
+        case DIRECTIONS.UP:
           return {
             ...prev,
             positions: updatePositions(
@@ -26,7 +26,7 @@ export const useSnake = () => {
               newPositions
             ),
           };
-        case DIRECTIONS.down:
+        case DIRECTIONS.DOWN:
           return {
             ...prev,
             positions: updatePositions(
@@ -34,7 +34,7 @@ export const useSnake = () => {
               newPositions
             ),
           };
-        case DIRECTIONS.left:
+        case DIRECTIONS.LEFT:
           return {
             ...prev,
             positions: updatePositions(
@@ -42,7 +42,7 @@ export const useSnake = () => {
               newPositions
             ),
           };
-        case DIRECTIONS.right:
+        case DIRECTIONS.RIGHT:
           return {
             ...prev,
             positions: updatePositions(

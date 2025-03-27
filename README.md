@@ -13,6 +13,7 @@ A game I'm making to test out Github Copilot and play with an Express server
 [x] - Generate new food
 [x] - Increase score
 [x] - End game on collision
-[] - Style
-[] - Change difficulty
-[] - Change grid size
+[x] - Style
+[x] - Change difficulty
+
+Yay! FE is ready for the BE

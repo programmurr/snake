@@ -7,16 +7,16 @@ export const useControls = (onKeyDown: (direction: Directions) => void) => {
     const handleKeyDown = (event: KeyboardEvent) => {
       switch (event.key) {
         case "ArrowUp":
-          onKeyDown(DIRECTIONS.up);
+          onKeyDown(DIRECTIONS.UP);
           break;
         case "ArrowDown":
-          onKeyDown(DIRECTIONS.down);
+          onKeyDown(DIRECTIONS.DOWN);
           break;
         case "ArrowLeft":
-          onKeyDown(DIRECTIONS.left);
+          onKeyDown(DIRECTIONS.LEFT);
           break;
         case "ArrowRight":
-          onKeyDown(DIRECTIONS.right);
+          onKeyDown(DIRECTIONS.RIGHT);
           break;
         default:
           break;
