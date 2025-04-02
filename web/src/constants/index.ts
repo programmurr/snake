@@ -10,9 +10,9 @@ const DIRECTIONS = {
 } as const;
 
 const DIFFICULTIES = [
-  { label: "Easy", value: 110 },
-  { label: "Medium", value: 50 },
-  { label: "Hard", value: 10 },
+  { label: "Easy", value: 110, multiplier: 1 },
+  { label: "Medium", value: 50, multiplier: 2 },
+  { label: "Hard", value: 10, multiplier: 3 },
 ];
 
 export { START, BOUNDARIES, DIRECTIONS, DIFFICULTIES };

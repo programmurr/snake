@@ -25,7 +25,7 @@ export const Game = () => {
 
   const [open, setOpen] = useState(false);
 
-  const [difficulty, setDifficulty] = useState(DIFFICULTIES[0].value);
+  const [difficulty, setDifficulty] = useState(DIFFICULTIES[0]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -39,14 +39,14 @@ export const Game = () => {
           snakeIsEatingFood(snake.positions[0], foodPosition)
         ) {
           updateFoodPosition();
-          setScore((prev) => prev + 1);
+          setScore((prev) => prev + 1 * difficulty.multiplier);
           grow();
         }
         if (collision(snake.positions)) {
           setIsPlaying(false);
           setOpen(true);
         }
-      }, difficulty);
+      }, difficulty.value);
       return () => clearInterval(interval);
     }
   }, [
@@ -76,10 +76,14 @@ export const Game = () => {
           </Typography>
           <Box className="grid-container">{grid}</Box>
           <DifficultySlider
-            value={difficulty}
+            value={difficulty.value}
             handleSliderChange={(_, value) => {
               if (!Array.isArray(value)) {
-                setDifficulty(value);
+                setDifficulty(
+                  () =>
+                    DIFFICULTIES.find((d) => d.value === value) ??
+                    DIFFICULTIES[0]
+                );
               }
             }}
           />

@@ -1,13 +1,13 @@
 import { Box, Divider, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { fetchHighScores } from "../hooks/useHighScores";
 import { Score } from "../types";
+import { getHighScores } from "../api";
 
 export const HighScores = () => {
   const [scores, setScores] = useState<Score[]>([]);
 
   useEffect(() => {
-    fetchHighScores().then((data) => setScores(data));
+    getHighScores().then((data) => setScores(data));
   }, []);
 
   return (

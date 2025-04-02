@@ -9,4 +9,14 @@ export const handlers = [
       { name: "DAN", score: 0 },
     ]);
   }),
+  http.post("/api/high-scores", async () => {
+    await delay(1000);
+    return new HttpResponse(null, {
+      status: 201,
+      statusText: "Score submitted",
+    });
+    // return new HttpResponse(null, {
+    //   status: 401,
+    // });
+  }),
 ];
