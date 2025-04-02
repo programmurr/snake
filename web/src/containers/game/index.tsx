@@ -8,6 +8,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { GameOverDialog } from "../../components/GameOverDialog";
 import { DIFFICULTIES } from "../../constants";
 import { DifficultySlider } from "../../components/DifficultySlider";
+import { HighScores } from "../../components/HighScores";
 
 export const Game = () => {
   const { snake, move, grow, changeDirection } = useSnake();
@@ -70,12 +71,9 @@ export const Game = () => {
           }}
         >
           <Typography variant="h1">Snek</Typography>
-          <Typography variant="body1" sx={{ margin: "1rem 0" }}>
+          <Typography variant="body1" sx={{ margin: "0 0 1rem 0" }}>
             Score: {score}
           </Typography>
-          <Button sx={{ margin: "1rem 0" }} onClick={() => setIsPlaying(true)}>
-            Start
-          </Button>
           <Box className="grid-container">{grid}</Box>
           <DifficultySlider
             value={difficulty}
@@ -85,6 +83,14 @@ export const Game = () => {
               }
             }}
           />
+          <Button
+            variant="contained"
+            sx={{ margin: "2rem 0" }}
+            onClick={() => setIsPlaying(true)}
+          >
+            Start
+          </Button>
+          <HighScores />
           <GameOverDialog
             score={score}
             open={open}

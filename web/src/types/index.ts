@@ -18,4 +18,9 @@ interface Snake {
   positions: Position[];
 }
 
-export type { Snake, Directions, Position, Food };
+interface Score {
+  name: string;
+  score: number;
+}
+
+export type { Snake, Directions, Position, Food, Score };
