@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "dev:app": "turbo dev --filter=snake-app",
+    "dev:snake": "turbo dev",
     "dev:web": "turbo dev --filter=snake-web",
     "build:web": "turbo build --filter=snake-web"
   },
